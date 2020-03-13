@@ -1,15 +1,12 @@
 package com.hcl.flight.model;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,13 +15,19 @@ public class BookingInfo {
 	
 private Long bid;
 
-@OneToOne(mappedBy = "bookingInfo",cascade =CascadeType.ALL)
+//@OneToOne(mappedBy = "bookingInfo",cascade =CascadeType.ALL)
+@ManyToOne(fetch = FetchType.LAZY, optional = false)
+@JoinColumn(name = "fid", nullable = false)
 private FlightBook flight;
-@OneToOne(mappedBy = "bookingInfos",cascade =CascadeType.ALL)
+//@OneToOne(mappedBy = "bookingInfos",cascade =CascadeType.ALL)
+@ManyToOne(fetch = FetchType.LAZY, optional = false)
+@JoinColumn(name = "uid", nullable = false)
 private UserDetails userDetails;
 
-@OneToMany(fetch = FetchType.LAZY,mappedBy = "bookingInfo",cascade =CascadeType.ALL)
-private List<PassengerDetails> passengerDetails;
+//@OneToMany(fetch = FetchType.LAZY,mappedBy = "bookingInfo",cascade =CascadeType.ALL)
+@ManyToOne(fetch = FetchType.LAZY, optional = false)
+@JoinColumn(name = "pid", nullable = false)
+private PassengerDetails passengerDetails;
 
 
 @Id
@@ -50,10 +53,10 @@ public UserDetails getUserDetails() {
 public void setUserDetails(UserDetails userDetails) {
 	this.userDetails = userDetails;
 }
-public List<PassengerDetails> getPassengerDetails() {
+public PassengerDetails getPassengerDetails() {
 	return passengerDetails;
 }
-public void setPassengerDetails(List<PassengerDetails> passengerDetails) {
+public void setPassengerDetails(PassengerDetails passengerDetails) {
 	this.passengerDetails = passengerDetails;
 }
 

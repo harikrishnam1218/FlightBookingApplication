@@ -1,12 +1,9 @@
 package com.hcl.flight.model;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,9 +14,9 @@ public class PassengerDetails {
 	private String name;
 	private String gender;
 	private Integer age;	
-	@ManyToOne(fetch = FetchType.LAZY)
+	/*@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="bid")
-	private BookingInfo bookingInfo;
+	private BookingInfo bookingInfo;*/
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,13 +44,13 @@ public class PassengerDetails {
 	public void setAge(Integer age) {
 		this.age = age;
 	}
-	public BookingInfo getBookingInfo() {
+	/*public BookingInfo getBookingInfo() {
 		return bookingInfo;
 	}
 	public void setBookingInfo(BookingInfo bookingInfo) {
 		this.bookingInfo = bookingInfo;
 	}
-	
+	*/
 
 	
 }

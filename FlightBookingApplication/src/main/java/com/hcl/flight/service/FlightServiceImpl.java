@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hcl.flight.exception.DBException;
 import com.hcl.flight.model.FlightBook;
+import com.hcl.flight.model.UserDetails;
 import com.hcl.flight.repository.FlightRepository;
 
 @Service
@@ -22,6 +24,16 @@ public class FlightServiceImpl implements FlightService{
 			throw new RuntimeException("No Available Flights Between Stations");
 		}
 		return avalilableFlights;
+	}
+
+
+	@Override
+	public FlightBook addFlightDetails(FlightBook flightBook) throws DBException {
+		FlightBook flight=flightRepository.save(flightBook);
+		if(flight==null) {
+			throw new DBException("Flight Details Data not saved Succesfulluy");
+		}
+		return flight;
 	}
 
 }

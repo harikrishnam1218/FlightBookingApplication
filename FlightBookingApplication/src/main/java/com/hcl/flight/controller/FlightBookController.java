@@ -37,7 +37,7 @@ public class FlightBookController {
 		return new ResponseEntity(list, HttpStatus.OK);
 	}
 	@PostMapping(value="/save")
-	public ResponseEntity saveUserDetails(@Valid UserDetails UserDetails) throws DBException{
+	public ResponseEntity addUserDetails(@Valid UserDetails UserDetails) throws DBException{
 		return new ResponseEntity(userService.saveUserDetails(UserDetails),HttpStatus.OK);
 	}
 	
@@ -56,5 +56,8 @@ public class FlightBookController {
 	 * saveUserDetails(@Valid UserDetails UserDetails) throws DBException{ return
 	 * new ResponseEntity(userService.saveUserDetails(UserDetails),HttpStatus.OK); }
 	 */
-	
+	@PostMapping(value="/saveflight")
+	public ResponseEntity<FlightBook> addFlightDetails(@Valid FlightBook flight) throws DBException{
+		return new ResponseEntity(flightService.addFlightDetails(flight),HttpStatus.OK);
+	}
 }

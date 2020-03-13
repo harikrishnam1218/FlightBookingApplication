@@ -15,8 +15,8 @@ private Long fid;
 private String fname;
 private String source;
 private String destination;
-private String seatno;
-private Date availableDate;
+private int  availableseats;
+private Date availabledate;
 private Double price;
 
 	/*
@@ -51,18 +51,7 @@ public String getDestination() {
 public void setDestination(String destination) {
 	this.destination = destination;
 }
-public String getSeatno() {
-	return seatno;
-}
-public void setSeatno(String seatno) {
-	this.seatno = seatno;
-}
-public Date getAvailableDate() {
-	return availableDate;
-}
-public void setAvailableDate(Date availableDate) {
-	this.availableDate = availableDate;
-}
+
 
 public Double getPrice() {
 	return price;
@@ -70,20 +59,38 @@ public Double getPrice() {
 public void setPrice(Double price) {
 	this.price = price;
 }
-
-	/*
-	 * public BookingInfo getBookingInfo() { return bookingInfo; } public void
-	 * setBookingInfo(BookingInfo bookingInfo) { this.bookingInfo = bookingInfo; }
-	 */
+public int getAvailableseats() {
+	return availableseats;
+}
+public void setAvailableseats(int availableseats) {
+	this.availableseats = availableseats;
+}
+public Date getAvailabledate() {
+	return availabledate;
+}
+public void setAvailabledate(Date availabledate) {
+	this.availabledate = availabledate;
+}
+public FlightBook(Long fid, String fname, String source, String destination, int availableseats, Date availabledate,
+		Double price) {
+	super();
+	this.fname = fname;
+	this.source = source;
+	this.destination = destination;
+	this.availableseats = availableseats;
+	this.availabledate = availabledate;
+	this.price = price;
+}
 @Override
 public int hashCode() {
 	final int prime = 31;
 	int result = 1;
-	result = prime * result + ((availableDate == null) ? 0 : availableDate.hashCode());
+	result = prime * result + ((availabledate == null) ? 0 : availabledate.hashCode());
+	result = prime * result + availableseats;
 	result = prime * result + ((destination == null) ? 0 : destination.hashCode());
 	result = prime * result + ((fid == null) ? 0 : fid.hashCode());
 	result = prime * result + ((fname == null) ? 0 : fname.hashCode());
-	result = prime * result + ((seatno == null) ? 0 : seatno.hashCode());
+	result = prime * result + ((price == null) ? 0 : price.hashCode());
 	result = prime * result + ((source == null) ? 0 : source.hashCode());
 	return result;
 }
@@ -96,10 +103,12 @@ public boolean equals(Object obj) {
 	if (getClass() != obj.getClass())
 		return false;
 	FlightBook other = (FlightBook) obj;
-	if (availableDate == null) {
-		if (other.availableDate != null)
+	if (availabledate == null) {
+		if (other.availabledate != null)
 			return false;
-	} else if (!availableDate.equals(other.availableDate))
+	} else if (!availabledate.equals(other.availabledate))
+		return false;
+	if (availableseats != other.availableseats)
 		return false;
 	if (destination == null) {
 		if (other.destination != null)
@@ -116,10 +125,10 @@ public boolean equals(Object obj) {
 			return false;
 	} else if (!fname.equals(other.fname))
 		return false;
-	if (seatno == null) {
-		if (other.seatno != null)
+	if (price == null) {
+		if (other.price != null)
 			return false;
-	} else if (!seatno.equals(other.seatno))
+	} else if (!price.equals(other.price))
 		return false;
 	if (source == null) {
 		if (other.source != null)
@@ -130,9 +139,19 @@ public boolean equals(Object obj) {
 }
 @Override
 public String toString() {
-	return "Flight [fid=" + fid + ", fname=" + fname + ", source=" + source + ", destination=" + destination
-			+ ", seatno=" + seatno + ", availableDate=" + availableDate + "]";
+	return "FlightBook [fid=" + fid + ", fname=" + fname + ", source=" + source + ", destination=" + destination
+			+ ", availableseats=" + availableseats + ", availabledate=" + availabledate + ", price=" + price + "]";
 }
+public FlightBook() {
+	super();
+}
+
+
+
+	/*
+	 * public BookingInfo getBookingInfo() { return bookingInfo; } public void
+	 * setBookingInfo(BookingInfo bookingInfo) { this.bookingInfo = bookingInfo; }
+	 */
 
 
 }
