@@ -12,7 +12,10 @@ import com.hcl.flight.model.FlightBook;
 @Repository
 public interface FlightRepository extends JpaRepository<FlightBook, Long>{
 	@Query("from FlightBook fb where fb.source=:source and fb.destination=:destination and fb.availabledate=:available ")
-	List<FlightBook> getBySourceAndDestnation(String source,String destnation,Date available);
+	List<FlightBook> getBySourceAndDestnation(String source,String destination,Date available);
+	
+	@Query("from FlightBook fb where fb.source=:source and fb.destination=:destination")
+	List<FlightBook> getBySourceAndDestnation(String source,String destination);
 
 }
 

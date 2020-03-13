@@ -1,5 +1,9 @@
 package com.hcl.flight.model;
 
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -7,58 +11,63 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="bookinginfo")
-public class BookingInfo {
-	
-private Long bid;
+@Table(name = "bookinginfo")
+public class BookingInfo implements Serializable{
 
-//@OneToOne(mappedBy = "bookingInfo",cascade =CascadeType.ALL)
-@ManyToOne(fetch = FetchType.LAZY, optional = false)
-@JoinColumn(name = "fid", nullable = false)
-private FlightBook flight;
-//@OneToOne(mappedBy = "bookingInfos",cascade =CascadeType.ALL)
-@ManyToOne(fetch = FetchType.LAZY, optional = false)
-@JoinColumn(name = "uid", nullable = false)
-private UserDetails userDetails;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9217099875498024799L;
 
-//@OneToMany(fetch = FetchType.LAZY,mappedBy = "bookingInfo",cascade =CascadeType.ALL)
-@ManyToOne(fetch = FetchType.LAZY, optional = false)
-@JoinColumn(name = "pid", nullable = false)
-private PassengerDetails passengerDetails;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long bid;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fid")
+	private FlightBook flight;
 
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-public Long getBid() {
-	return bid;
-}
-public void setBid(Long bid) {
-	this.bid = bid;
-}
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "uid")
+	private UserDetails userDetails;
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "bookingInfo",cascade = CascadeType.ALL)
+	private List<PassengerDetails> passengerDetails;
 
-public FlightBook getFlight() {
-	return flight;
-}
+	public List<PassengerDetails> getPassengerDetails() {
+		return passengerDetails;
+	}
 
-public void setFlight(FlightBook flight) {
-	this.flight = flight;
-}
-public UserDetails getUserDetails() {
-	return userDetails;
-}
-public void setUserDetails(UserDetails userDetails) {
-	this.userDetails = userDetails;
-}
-public PassengerDetails getPassengerDetails() {
-	return passengerDetails;
-}
-public void setPassengerDetails(PassengerDetails passengerDetails) {
-	this.passengerDetails = passengerDetails;
-}
+	public void setPassengerDetails(List<PassengerDetails> passengerDetails) {
+		this.passengerDetails = passengerDetails;
+	}
 
+	public Long getBid() {
+		return bid;
+	}
+
+	public void setBid(Long bid) {
+		this.bid = bid;
+	}
+
+	public FlightBook getFlight() {
+		return flight;
+	}
+
+	public void setFlight(FlightBook flight) {
+		this.flight = flight;
+	}
+
+	public UserDetails getUserDetails() {
+		return userDetails;
+	}
+
+	public void setUserDetails(UserDetails userDetails) {
+		this.userDetails = userDetails;
+	}
 
 }
