@@ -36,12 +36,12 @@ public class BookingServiceImpl implements BookingService{
 			throw new UserNotFoundException("UserName Not Found Exception");
 		}
 		//bookingInfo.setUserDetails(user1);
-		/*
-		 * List<PassengerDetails> passengers=bookingInfo.getPassengerDetails(); for
-		 * (PassengerDetails passengerDetails : passengers) {
-		 * passengerDetails.setBookingInfo(bookingInfo); }
-		 * bookingInfo.setPassengerDetails(passengers);
-		 */
+		
+		  List<PassengerDetails> passengers=bookingInfo.getPassengerDetails(); 
+		  for(PassengerDetails passengerDetails : passengers) {
+		  passengerDetails.setBookingInfo(bookingInfo); }
+		  bookingInfo.setPassengerDetails(passengers);
+		 
 		BookingInfo info = bookingRepository.save(bookingInfo);
 		  if(Objects.isNull(info)) {
 			  throw new DBException("booking info was not saved in DB");
